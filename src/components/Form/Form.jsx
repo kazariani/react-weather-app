@@ -1,7 +1,7 @@
 import React from "react";
 import "./Form.css";
 
-export default function Form(){
+export default function Form() {
     return (
         <form className="row align-items-stretch my-5">
             <div className="col pe-1">

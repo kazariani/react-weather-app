@@ -1,7 +1,7 @@
 import React from "react";
 import "./Forecast.css";
 
-export default function Forecast(){
+export default function Forecast() {
     let forecastData = {
         mon: "+13",
         tue: "+15",
@@ -10,7 +10,7 @@ export default function Forecast(){
         fri: "+18",
         sat: "+17",
         sun: "+19",
-      };
+    };
     return (
         <div className="row weather-next my-3">
             <div className="col text-center">
