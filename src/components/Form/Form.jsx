@@ -9,12 +9,12 @@ export default function Form() {
             </div>
 
             <div className="col-auto ps-0">
-                <button type="submit" className="btn btn-primary">Search</button>
+                <button type="submit" className="btn btn-primary">Suchen</button>
             </div>
 
             <div className="col-auto">
                 <button type="submit" className="btn btn-primary">
-                    <i className="fa-solid fa-location-crosshairs"></i> Current location
+                    <i className="fa-solid fa-location-crosshairs"></i> Aktueller Standort
                 </button>
             </div>
         </form>
