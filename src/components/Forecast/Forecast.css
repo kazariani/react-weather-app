@@ -1,0 +1,12 @@
+.week-day {
+  color: gray;
+}
+.weather-next i {
+  color: lightblue;
+  font-size: 2rem;
+  display: block;
+  margin: 0.5rem 0;
+}
+.temperature-next {
+  font-weight: 600;
+}

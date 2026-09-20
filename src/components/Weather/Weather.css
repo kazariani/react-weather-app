@@ -1,0 +1,23 @@
+.weather-today {
+    display: inline-block;
+    font-size: 30px;
+    vertical-align: middle;
+  }
+  .temperature-today {
+    display: inline-block;
+    font-size: 60px;
+    font-weight: 500;
+    padding-right: 20px;
+    position: relative;
+    vertical-align: middle;
+  }
+  .temperature-unit {
+    font-size: 15px;
+    line-height: 1;
+    position: absolute;
+    top: 1rem;
+    right: -1rem;
+  }
+  .temperature-unit a {
+    text-decoration: none;
+  }
