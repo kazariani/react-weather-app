@@ -10,7 +10,7 @@ export default function Cities() {
                 <small>
                     <a className="me-3" href="">Kyiv</a>
                     <a className="me-3" href="">Berlin</a>
-                    <a className="me-3" href="">Tel Aviv</a>
+                    <a className="me-3" href="">Madrid</a>
                     <a className="me-3" href="">London</a>
                 </small>
             </div>

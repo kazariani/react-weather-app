@@ -13,8 +13,7 @@ function App() {
 
 			<div className="weather container border border-secondary border-2 rounded p-4">
 				<Cities />
-				<Form />
-				<Weather />
+				<Form defaultCity="Freudenstadt" />
 				<Forecast />
 			</div>
 
