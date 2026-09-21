@@ -11,7 +11,7 @@ export default function Temperature(props) {
 
     return (
         <span className="temperature-today">
-            <span>{unit === "C" ? props.data : Math.round(props.data*9/5 + 32)}</span>
+            <span className="temperature-value">{unit === "C" ? props.data : Math.round(props.data*9/5 + 32)}</span>
             <span className="temperature-unit">
                 °{unit} | <a href="#" onClick={toggleUnit}>°{unit === "C" ? "F" : "C"}</a>
             </span>

@@ -9,10 +9,8 @@ export default function Weather(props) {
         <div className="row align-items-center mt-5">
             <div className="col">
                 <h2 className="mb-1">{props.data.city}</h2>
-                <p>
-                    <FormattedDate date={props.data.date} />
-                    {props.data.description}
-                </p>
+                <FormattedDate date={props.data.date} />
+                {props.data.description}
             </div>
 
             <div className="col text-nowrap">

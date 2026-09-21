@@ -9,6 +9,7 @@
 	margin: 0.5rem 0;
 }
 
-.temperature-next {
+.temperature-max {
 	font-weight: 600;
+	margin-right: 0.25rem;
 }

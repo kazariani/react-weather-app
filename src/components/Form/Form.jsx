@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Weather from "../Weather/Weather.jsx";
+import Forecast from "../Forecast/Forecast.jsx";
 import axios from "axios";
 import "./Form.css";
 
@@ -10,15 +11,17 @@ export default function Form(props) {
     function handleResponse(response) {
         console.log(response.data);
         setWeatherData({
-            city: response.data.name,
-            date: new Date(response.data.dt * 1000),
-            description: response.data.weather[0].description,
-            feelsLike: Math.round(response.data.main.feels_like),
-            temperature: Math.round(response.data.main.temp),
-            iconUrl: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-            precipitation: response.data.clouds.all,
-            humidity: response.data.main.humidity,
-            wind: Math.round(response.data.wind.speed),
+            city: response.data.location.name,
+            //date: new Date(response.data.current.localtime_epoch * 1000),
+            date: response.data.location.localtime,
+            description: response.data.current.condition.text,
+            feelsLike: Math.round(response.data.current.feelslike_c),
+            temperature: Math.round(response.data.current.temp_c),
+            iconUrl: response.data.current.condition.icon,
+            precipitation: response.data.current.cloud,
+            humidity: response.data.current.humidity,
+            wind: Math.round(response.data.current.wind_kph),
+            coordinates: response.data.location,
             ready: true
         });
     }
@@ -33,9 +36,8 @@ export default function Form(props) {
     }
 
     function search() {
-        const apiKey = "7074cc308bd9a424ae50e91089409cf9";
-        let units = "metric";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+        const apiKey = "efb47f8f59024381bff113346262109";
+        let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=yes`;
         axios.get(apiUrl).then(handleResponse);
     }
 
@@ -59,6 +61,7 @@ export default function Form(props) {
                 </form>
 
                 <Weather data={weatherData} />
+                <Forecast data={weatherData} />
             </div>
         )
     } else {
