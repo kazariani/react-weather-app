@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Temperature.css";
+import { useUnit } from "../../context/UnitContext";
 
 export default function Temperature(props) {
-    const [unit, setUnit] = useState("C");
-
-    const toggleUnit = (event) => {
-        event.preventDefault();
-        setUnit(unit === "C" ? "F" : "C");
-    };
+    const { unit, toggleUnit } = useUnit();
 
     return (
         <span className="temperature-today">
-            <span className="temperature-value">{unit === "C" ? props.data : Math.round(props.data*9/5 + 32)}</span>
+            <span className="temperature-value">{unit === "metric" ? props.data : Math.round(props.data*9/5 + 32)}</span>
             <span className="temperature-unit">
-                °{unit} | <a href="#" onClick={toggleUnit}>°{unit === "C" ? "F" : "C"}</a>
+                °{unit === "metric" ? "C" : "F"} | <a href="#" onClick={toggleUnit}>°{unit === "metric" ? "F" : "C"}</a>
             </span>
         </span>
     )
