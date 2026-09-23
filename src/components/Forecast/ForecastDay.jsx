@@ -10,7 +10,7 @@ export default function ForecastDay(props) {
             <small className="text-secondary">{new Date(props.data.date).toLocaleDateString("en-US", { month: "short", day: "numeric" })}</small>
             <img alt={props.data.day.condition.text} src={props.data.day.condition.icon}></img>
 
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-around">
                 <span className="temperature-max">
                     {unit === "metric" ? Math.round(props.data.day.maxtemp_c) : Math.round(props.data.day.maxtemp_c*9/5 + 32)}°
                 </span>

@@ -20,8 +20,8 @@ export default function Form(props) {
         setWeatherData({
             city: response.data.location.name,
             country: response.data.location.country,
-            date: response.data.location.localtime_epoch,
             timezone: response.data.location.tz_id,
+            date: response.data.location.localtime_epoch,
             description: response.data.current.condition.text,
             feelsLike: Math.round(response.data.current.feelslike_c),
             temperature: Math.round(response.data.current.temp_c),
@@ -30,7 +30,7 @@ export default function Form(props) {
             humidity: response.data.current.humidity,
             wind: Math.round(response.data.current.wind_kph),
             coordinates: response.data.location,
-
+            forecast: response.data.forecast.forecastday,
             ready: true
         });
 
@@ -47,7 +47,7 @@ export default function Form(props) {
 
     const search = () => {
         const apiKey = "efb47f8f59024381bff113346262109";
-        let apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
+        let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=no&alerts=no`;
         axios.get(apiUrl).then(handleResponse);
     }
 
@@ -75,7 +75,7 @@ export default function Form(props) {
                 </form>
 
                 <Weather data={weatherData} />
-                <Forecast data={weatherData} />
+                <Forecast data={weatherData.forecast} />
             </div>
         )
     } else {
