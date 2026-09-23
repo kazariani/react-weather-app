@@ -9,7 +9,7 @@
 
 .temperature-value {
 	display: inline-block;
-	min-width: 75px;
+	min-width: 80px;
 }
 
 .temperature-unit {

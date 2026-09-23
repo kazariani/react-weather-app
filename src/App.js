@@ -1,18 +1,14 @@
 import './App.css';
 
-import Cities from "./components/Cities/Cities.jsx";
 import Form from "./components/Form/Form.jsx";
-import Weather from "./components/Weather/Weather.jsx";
-import Forecast from "./components/Forecast/Forecast.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
 function App() {
 	return (
 		<div className="App">
-			<h1>Weather App</h1>
+			<h1 className="text-center m-5">Weather App</h1>
 
-			<div className="weather container border border-secondary border-2 rounded p-4">
-				<Cities />
+			<div className="weather container border border-secondary border-2 rounded p-5">
 				<Form defaultCity="Freudenstadt" />
 			</div>
 
