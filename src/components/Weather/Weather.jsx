@@ -7,7 +7,7 @@ import { useUnit } from "../../context/UnitContext";
 
 
 export default function Weather(props) {
-    const { unit, toggleUnit } = useUnit();
+    const { unit } = useUnit();
 
     return (
         <div className="mt-5">
@@ -30,7 +30,7 @@ export default function Weather(props) {
                 <div className="col-4">
                     <ul className="list-unstyled text-end mb-0">
                         <li className="small">
-                            <span className="text-secondary">Feels like:</span> {unit === "metric" ? props.data.feelsLike : Math.round(props.data.feelsLike*9/5 + 32)}°{unit === "metric" ? "C" : "F"}
+                            <span className="text-secondary">Feels like:</span> <span className="weather-feelslike">{unit === "metric" ? props.data.feelsLike : Math.round(props.data.feelsLike*9/5 + 32)}°{unit === "metric" ? "C" : "F"}</span>
                         </li>
                         <li className="small"><span className="text-secondary">Precipitation:</span> {props.data.precipitation}%</li>
                         <li className="small"><span className="text-secondary">Humidity:</span> {props.data.humidity}%</li>

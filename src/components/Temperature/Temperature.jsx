@@ -9,7 +9,7 @@ export default function Temperature(props) {
         <span className="temperature-today">
             <span className="temperature-value">{unit === "metric" ? props.data : Math.round(props.data*9/5 + 32)}</span>
             <span className="temperature-unit">
-                °{unit === "metric" ? "C" : "F"} | <a href="#" onClick={toggleUnit}>°{unit === "metric" ? "F" : "C"}</a>
+                <span className="temperature-unit_current">°{unit === "metric" ? "C" : "F"}</span> | <a href="#" onClick={toggleUnit}>°{unit === "metric" ? "F" : "C"}</a>
             </span>
         </span>
     )
