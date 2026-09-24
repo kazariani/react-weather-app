@@ -4,9 +4,9 @@ import Forecast from "../Forecast/Forecast.jsx";
 import axios from "axios";
 import "./Form.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
-import { far } from '@fortawesome/free-regular-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import { useTheme } from "../../context/ThemeContext";
 
 library.add(fas, far)
@@ -24,9 +24,9 @@ export default function Form(props) {
     const iconHeartFilled = <FontAwesomeIcon icon="fa-solid fa-heart" />;
     const iconRemove = <FontAwesomeIcon icon="fa-solid fa-xmark" />;
     const iconDropdown = <FontAwesomeIcon icon="fa-solid fa-angle-down" />;
-    const iconCloudShowersHeavy = <FontAwesomeIcon icon="fa-solid fa-cloud-showers-heavy" />;
-    const iconCloudSun = <FontAwesomeIcon icon="fa-solid fa-cloud-sun" />;
-    const iconUmbrella = <FontAwesomeIcon icon="fa-solid fa-umbrella" />;
+    const iconCloudShowersHeavy = <FontAwesomeIcon icon="fa-solid fa-cloud-showers-heavy" style={{color: "rgb(116, 192, 252)",}} />;
+    const iconCloudSun = <FontAwesomeIcon icon="fa-solid fa-cloud-sun" style={{color: "rgb(255, 212, 59)",}} />;
+    const iconUmbrella = <FontAwesomeIcon icon="fa-solid fa-umbrella" style={{color: "rgb(99, 230, 190)",}} />;
     const [savedCities, setSavedCities] = useState(() => {
         const saved = localStorage.getItem("savedCities");
 
@@ -37,6 +37,15 @@ export default function Form(props) {
     useEffect(() => {
         search(city);
     }, [city]);
+
+    useEffect(() => {
+        if (savedCities.length > 0 && !city) {
+            const defaultCity = savedCities[0];
+
+            setCity(defaultCity);
+            search(defaultCity);
+        }
+    }, []);
 
     const addFavorite = () => {
         if (!city) {
