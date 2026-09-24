@@ -6,12 +6,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { UnitProvider } from "./context/UnitContext";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<UnitProvider>
-			<App />
+			<ThemeProvider>
+				<App />
+			</ThemeProvider>
 		</UnitProvider>
 	</React.StrictMode>
 );

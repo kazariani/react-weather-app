@@ -15,6 +15,11 @@ body {
 	font-size: 16px;
 }
 
+body.dark-mode {
+	background-color: #121212;
+	color: #fff;
+}
+
 a {
 	color: #1E8AE7;
 }

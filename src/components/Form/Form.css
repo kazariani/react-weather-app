@@ -20,7 +20,7 @@
     display: block;
 }
 
-.btn {
+.btn-primary {
     color: #fff;
     background-color: #1E8AE7;
     border: 1px solid #1E8AE7;
@@ -37,14 +37,6 @@
 .dropdown-item {
     display: flex;
     justify-content: space-between;
-}
-
-.fav-cities button,
-.fav-cities button:hover,
-.fav-cities button.show {
-    background-color: transparent;
-    border: none;
-    color: #212529;
 }
 
 .fav-cities button .fa-angle-down {

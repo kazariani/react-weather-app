@@ -188,7 +188,7 @@ export default function Form(props) {
 
                     <div className="col text-end">
                         <div className="dropdown fav-cities">
-                            <button className="btn dropdown-toggle pe-0" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 Saved cities {iconDropdown}
                             </button>
                             <ul className="dropdown-menu">
