@@ -11,7 +11,7 @@ export default function Temperature(props) {
             <span className="temperature-unit">
                 <span className="temperature-unit_current">
                     °{unit === "metric" ? "C" : "F"}
-                </span> | <a href="#" onClick={toggleUnit}>°{unit === "metric" ? "F" : "C"}</a>
+                </span> | <span className="temperature-unit_toggle" onClick={toggleUnit}>°{unit === "metric" ? "F" : "C"}</span>
             </span>
         </span>
     )

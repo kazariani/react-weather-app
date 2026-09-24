@@ -30,3 +30,16 @@
     line-height: 1.5;
     padding: .375rem .75rem;
 }
+
+.fav-add {
+    cursor: pointer;
+}
+
+.fav-remove {
+    color: crimson;
+    cursor: pointer;
+}
+
+.fav-city {
+    cursor: pointer;
+}

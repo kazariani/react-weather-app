@@ -19,6 +19,7 @@
 	vertical-align: text-top;
 }
 
-.temperature-unit a {
-	text-decoration: none;
+.temperature-unit_toggle {
+	color: #1E8AE7;
+	cursor: pointer;
 }
