@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
+import { useTheme } from "../../context/ThemeContext";
 
 library.add(fas, far)
 
@@ -28,10 +29,11 @@ export default function Form(props) {
 
         return saved ? JSON.parse(saved) : [];
     });
+    const { darkMode } = useTheme();
 
     useEffect(() => {
         search(city);
-    }, []);
+    }, [city]);
 
     const addFavorite = () => {
         if (!city) {
@@ -188,10 +190,10 @@ export default function Form(props) {
 
                     <div className="col text-end">
                         <div className="dropdown fav-cities">
-                            <button className="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                            <button className={`btn dropdown-toggle ${darkMode ? 'btn-dark' : 'btn-light'}`} type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                 Saved cities {iconDropdown}
                             </button>
-                            <ul className="dropdown-menu">
+                            <ul className={`dropdown-menu ${darkMode ? 'dropdown-menu-dark' : ''}`}>
                                 <li><h6 className="dropdown-header">{savedCities.length > 0 ? "Your Saved Cities" : "No Saved Cities"}</h6></li>
                                 {savedCities.map(function (item, index) {
                                     return (
@@ -209,7 +211,7 @@ export default function Form(props) {
 
                 <form onSubmit={handleSubmit} className="row align-items-stretch">
                     <div className="col pe-1">
-                        <input onChange={(event) => setSearchText(event.target.value)} type="search" className="form-control" value={searchText} placeholder="Please enter a city..." />
+                        <input onChange={(event) => setSearchText(event.target.value)} type="search" className={`form-control ${darkMode ? 'text-light bg-dark border-secondary' : ''}`} value={searchText} placeholder="Please enter a city..." />
                     </div>
 
                     <div className="col-auto ps-0">

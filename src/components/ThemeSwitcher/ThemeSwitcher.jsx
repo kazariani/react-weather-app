@@ -11,7 +11,7 @@ const ThemeSwitcher = () => {
         <div className="theme-switcher">
             <button
                 type="button"
-                className="btn btn-light theme-toggle"
+                className="btn btn-outline-secondary theme-toggle"
                 onClick={toggleTheme}
                 aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
             >

@@ -20,6 +20,10 @@
     display: block;
 }
 
+input.text-light::placeholder {
+  color: #f8f9fa;
+}
+
 .btn-primary {
     color: #fff;
     background-color: #1E8AE7;
