@@ -30,6 +30,9 @@
     line-height: 1.5;
     padding: .375rem .75rem;
 }
+.dropdown-toggle:after {
+    display: none;
+}
 
 .dropdown-item {
     display: flex;
@@ -44,8 +47,21 @@
     color: #212529;
 }
 
+.fav-cities button .fa-angle-down {
+    transition: all 0.3s ease-in-out;
+}
+
+.fav-cities button.show .fa-angle-down {
+    transform: rotate(180deg);
+}
+
 .fav-add {
     cursor: pointer;
+    line-height: 1;
+}
+
+.fav-add .fa-heart {
+    height: 2.25em;
 }
 
 .fav-remove {

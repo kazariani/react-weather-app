@@ -22,6 +22,7 @@ export default function Form(props) {
     const iconHeart = <FontAwesomeIcon icon="fa-regular fa-heart" />;
     const iconHeartFilled = <FontAwesomeIcon icon="fa-solid fa-heart" />;
     const iconRemove = <FontAwesomeIcon icon="fa-solid fa-xmark" />;
+    const iconDropdown = <FontAwesomeIcon icon="fa-solid fa-angle-down" />;
     const [savedCities, setSavedCities] = useState(() => {
         const saved = localStorage.getItem("savedCities");
 
@@ -45,6 +46,7 @@ export default function Form(props) {
             ...currentCities,
             city,
         ]);
+        
         localStorage.setItem("savedCities", JSON.stringify([...savedCities, city]));
     };
 
@@ -88,6 +90,7 @@ export default function Form(props) {
         event.preventDefault();
 
         search(searchText);
+        setCity(searchText);
         setSearchText("");
     }
 
@@ -175,17 +178,18 @@ export default function Form(props) {
     } else {
         return (
             <div>
-                <div className="row align-items-start mb-5">
+                <div className="row align-items-center mb-5">
                     <div className="col-auto">
-                        {savedCities.includes(city) ? <span className="fav-add" onClick={() => handleRemoveCity(city)}>{iconHeartFilled}</span> : (
-                            <span className="fav-add" onClick={addFavorite}>{iconHeart}</span>
-                        )}
+                        {savedCities.includes(city) ? 
+                            <div className="fav-add" onClick={() => handleRemoveCity(city)}>{iconHeartFilled}</div> :
+                            <div className="fav-add" onClick={addFavorite}>{iconHeart}</div>
+                        }
                     </div>
 
                     <div className="col text-end">
                         <div className="dropdown fav-cities">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                Saved cities
+                            <button className="btn dropdown-toggle pe-0" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                Saved cities {iconDropdown}
                             </button>
                             <ul className="dropdown-menu">
                                 <li><h6 className="dropdown-header">{savedCities.length > 0 ? "Your Saved Cities" : "No Saved Cities"}</h6></li>
