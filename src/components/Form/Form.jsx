@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Weather from "../Weather/Weather.jsx";
 import Forecast from "../Forecast/Forecast.jsx";
 import axios from "axios";
@@ -11,8 +11,9 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 library.add(fas, far)
 
 export default function Form(props) {
-    const [weatherData, setWeatherData] = useState({ ready: false});
+    const [weatherData, setWeatherData] = useState({ ready: false });
     const [city, setCity] = useState(props.defaultCity);
+    const [searchText, setSearchText] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const apiKey = "efb47f8f59024381bff113346262109";
@@ -27,7 +28,11 @@ export default function Form(props) {
         return saved ? JSON.parse(saved) : [];
     });
 
-    const addFavorite = async () => {
+    useEffect(() => {
+        search(city);
+    }, []);
+
+    const addFavorite = () => {
         if (!city) {
             return;
         }
@@ -56,10 +61,10 @@ export default function Form(props) {
 
     const onCitySelect = (city) => {
         setCity(city);
-        search();
+        search(city);
     };
 
-    const handleResponse = (response) => {
+    const handleResponse = async (response) => {
         setWeatherData({
             city: response.data.location.name,
             country: response.data.location.country,
@@ -79,18 +84,18 @@ export default function Form(props) {
         setError("");
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        search();
-    }
 
-    const handleCityChange = (event) => {
-        setCity(event.target.value);
+        search(searchText);
+        setSearchText("");
     }
 
     const handleResponseLocation = (response) => {
-        setCity(response.data.location.name);
-        search();
+        const cityName = response.data.location.name;
+
+        setCity(cityName);
+        search(cityName);
     }
 
     const getCurrentLocation = () => {
@@ -106,10 +111,12 @@ export default function Form(props) {
             async (position) => {
                 let lat = parseFloat(position.coords.latitude).toFixed(4);
                 let lon = parseFloat(position.coords.longitude).toFixed(4);
+                let apiUrlLocation = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=no`;
 
                 try {
-                    let apiUrlLocation = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&aqi=no`;
-                    axios.get(apiUrlLocation).then(handleResponseLocation);
+                    const response = await axios.get(apiUrlLocation);
+
+                    handleResponseLocation(response);
                 } catch (err) {
                     setError("Unable to fetch weather data.");
                     console.error(err);
@@ -147,8 +154,15 @@ export default function Form(props) {
         );
     }
 
-    const search = () => {
-        let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7&aqi=no&alerts=no`;
+    const search = (cityToSearch) => {
+        if (!cityToSearch?.trim()) {
+            return;
+        }
+
+        setLoading(true);
+        setError("");
+
+        let apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${cityToSearch}&days=7&aqi=no&alerts=no`;
         axios.get(apiUrl).then(handleResponse).catch((error) => {
             setError("Could not fetch weather data.");
         }).finally(() => {
@@ -156,7 +170,9 @@ export default function Form(props) {
         });
     }
 
-    if (weatherData.ready) {
+    if (!weatherData.ready) {
+        return <p>Loading weather...</p>;
+    } else {
         return (
             <div>
                 <div className="row align-items-start mb-5">
@@ -167,13 +183,21 @@ export default function Form(props) {
                     </div>
 
                     <div className="col text-end">
-                        {savedCities.map(function(item, index){
-                            return (
-                                <div key={index} className="d-inline-block ms-3">
-                                    <small className="fav-city" onClick={() => onCitySelect(item)}>{item}</small> <small onClick={() => handleRemoveCity(item)} className="fav-remove">{iconRemove}</small>
-                                </div>
-                            );
-                        })}
+                        <div className="dropdown fav-cities">
+                            <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                Saved cities
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li><h6 className="dropdown-header">{savedCities.length > 0 ? "Your Saved Cities" : "No Saved Cities"}</h6></li>
+                                {savedCities.map(function (item, index) {
+                                    return (
+                                        <li key={index} className="dropdown-item">
+                                            <small className="fav-city" onClick={() => onCitySelect(item)}>{item}</small> <small onClick={() => handleRemoveCity(item)} className="fav-remove">{iconRemove}</small>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
@@ -181,7 +205,7 @@ export default function Form(props) {
 
                 <form onSubmit={handleSubmit} className="row align-items-stretch">
                     <div className="col pe-1">
-                        <input onChange={handleCityChange} type="search" className="form-control" placeholder="Please enter a city..." />
+                        <input onChange={(event) => setSearchText(event.target.value)} type="search" className="form-control" value={searchText} placeholder="Please enter a city..." />
                     </div>
 
                     <div className="col-auto ps-0">
@@ -201,8 +225,5 @@ export default function Form(props) {
                 <Forecast data={weatherData.forecast} />
             </div>
         )
-    } else {
-        search();
-        return null;
     }
 }
